@@ -53,7 +53,8 @@ header .logo--area img {
     border-radius: 7px;
     color:#fff;
     text-align: center;
-    font-size: 10pt;
+    font-size: 11pt;
+    padding-left: 8px;
     margin-right: 5px;
 }
 
@@ -69,6 +70,13 @@ main {
     display: flex;
     flex-direction: column;
     width: 250px;
+    
+}
+#listaCategorias li {
+    text-transform: capitalize;
+}
+.modelCategoria {
+    display: none;
 }
 
 aside ul {
@@ -97,10 +105,15 @@ section #produtos {
     padding-top: 20px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    row-gap: 30px;
+}
+.model .product--box,
+.descricaoModal {
+    display: none;
 }
 .product--box {
     width: 260px;
-    max-height: 400px;
+    height: 460px;
     cursor: pointer;
     padding: 10px;
     margin-right: 30px;
@@ -139,6 +152,7 @@ section #produtos {
     color: #a9b1be;
 }
 .modal-cart{
+    transition: 0.5s;
     display: none;
     position: fixed;
     top:0;
@@ -173,12 +187,17 @@ section #produtos {
 .body-cart {
     padding: 30px;
 }
+
 .item-cart {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding-bottom: 10px;
     padding-top: 10px;
     border-bottom: 1px solid #000;
+}
+.model .item-cart {
+    display: none;
 }
 .nome-produto-carrinho {
     font-size: 20px;
@@ -191,7 +210,17 @@ section #produtos {
 .miniatura-imagem img {
     height: 100%;
 }
+
+.price-cart {
+    padding-right: 20px;
+}
+.img-nome-cart {
+    display: flex;
+    align-items: center;
+}
 .box-qt {
+    display: flex;
+    align-items: center;
     margin-left: 40px;
     margin-right: 40px;
 }
@@ -205,16 +234,17 @@ section #produtos {
     border-radius: 10px;
     background-color: #8e83f6;
 }
+.qt-cart button {
+    background-color: #8e83f6;
+    border: 0;
+}
 .qt-cart-minus {
     cursor: pointer;
+    padding: 0px 10px;
     color: #FFF;
 }
-.qt-cart-minus,
 .qt-cart-prod {
-    border-right: 1px solid #000;
     padding: 0px 10px;
-}
-.qt-cart-prod {
     background-color: #fff;
 }
 .qt-cart-plus {
@@ -244,6 +274,7 @@ section #produtos {
 }
 .modal--product{
     position: fixed;
+    transition: 0.5s;
     top:0;
     display: none;
     align-items: center;
@@ -254,9 +285,10 @@ section #produtos {
 }
 
 .container--modal {
+    transition: 0.5s;
     border-radius: 20px;
     width: 70%;
-    height: 40vw;
+    height: 90%;
     background-color: #ddd;
     display: flex;
     justify-content: space-between;
@@ -303,6 +335,7 @@ section #produtos {
     margin-bottom: 20px;
     font-size: 18px;
     text-align: justify;
+    overflow-y: auto;
 }
 .product-infos h3 {
     margin-top: 40px;
@@ -323,7 +356,6 @@ section #produtos {
 }
 .button-cart button {
     display: block;
-    margin-left: 40px;
     outline: 0;
     border:0;
     background-color: #8e83f6;
@@ -333,10 +365,22 @@ section #produtos {
     padding: 10px 30px;
     font-weight: 600;
 }
+.sep {
+    margin-right: 40px;
+}
+.sep button {
+    display: block;
+    outline: 0;
+    border:0;
+    background-color: #8e83f6;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 15px;
+    padding: 3px 10px;
+    font-weight: 600;
+}
 .quantidade {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     border: 1px solid #000;
     font-size: 18px;
     font-weight: 700;
@@ -346,17 +390,14 @@ section #produtos {
 .quantidade .minus {
     cursor: pointer;
     color: #FFF;
-}
-.quantidade .minus,
-.quantidade .qt-prod {
-    border-right: 1px solid #000;
-    padding: 0px 10px;
+    border:0;
 }
 .quantidade .qt-prod {
+    border:0;
     background-color: #fff;
+    padding: 3px 7px;
 }
 .quantidade .plus {
-    padding: 0px 10px;
     cursor: pointer;
     color: #FFF;
 }
