@@ -142,20 +142,26 @@ const attCarrinho = () => {
     c(".total-cart").innerHTML = "R$ "+totalItens.toFixed(2).replace(".",",");
 };
 const abrirCarrinho = () => {
+    // if(carrinho.length > 0){
+    //     c('.modal-cart').style.opacity = 0;
+    //     c('.modal-cart').style.display = 'flex';
+    //     setTimeout(()=>{
+    //         c('.modal-cart').style.opacity = 1;
+    //     },100);
+    //     c("header").style.position = "static";
+    // }
     if(carrinho.length > 0){
-        c('.modal-cart').style.opacity = 0;
-        c('.modal-cart').style.display = 'flex';
-        setTimeout(()=>{
-            c('.modal-cart').style.opacity = 1;
-        },100);
+        c('.cart-side').classList.add("showCart");
         c("header").style.position = "static";
     }
 }
 const fecharCarrinho = () => {
-    c('.modal-cart').style.opacity = 0;
-    setTimeout(()=>{
-        c('.modal-cart').style.display = 'none';
-    },500);
+    // c('.modal-cart').style.opacity = 0;
+    // setTimeout(()=>{
+    //     c('.modal-cart').style.display = 'none';
+    // },500);
+    // c("header").style.position = "fixed";
+    c('.cart-side').classList.remove("showCart");
     c("header").style.position = "fixed";
 }
 c(".box--cart").addEventListener("click",abrirCarrinho);
@@ -198,15 +204,15 @@ const diminuirQntCart = (sku)=> {
             indexAr = index;
             return item;
         }
-    });
+    }); 
+    if(carrinho[indexAr].quantidade == 1) {
+        carrinho.splice(indexAr,1);
+        attCarrinho();
+    }
     if(carrinho[indexAr].quantidade>1) {
         let precoUnit = carrinho[indexAr].subtotalItem / parseInt(carrinho[indexAr].quantidade);
         carrinho[indexAr].quantidade = parseInt(carrinho[indexAr].quantidade) - 1;
         carrinho[indexAr].subtotalItem = precoUnit * +carrinho[indexAr].quantidade;
-        attCarrinho();
-    } 
-    if(carrinho[indexAr].quantidade == 1) {
-        carrinho.splice(indexAr,1);
         attCarrinho();
     }
 };

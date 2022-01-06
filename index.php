@@ -40,9 +40,7 @@
             </div>
         </div>
     </div>
-    
-    <div class="modal-cart">
-        <div class="cart-side">
+    <div class="cart-side">
             <div class="head-cart">
                 <h1>Carrinho  &#128722;</h1>
                 <div class="fechar-carrinho">x</div>
@@ -77,7 +75,6 @@
                 </div>
             </div>
         </div>
-    </div>
     <header class="">
         <div class="search--area">
             <img src="assets/img/lupa.png">
