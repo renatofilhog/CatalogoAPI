@@ -98,7 +98,7 @@
                 </div>
                 
                 <h3>Categorias</h3>
-                <ul id="listaCategorias">
+                <ul id="listaCategorias" data-catAtiva="tudo">
                     <li class="active" onclick="switchCategoria('tudo')"><span class="active color-site">&#10004;</span> Tudo</li>
                 </ul>
             </aside>

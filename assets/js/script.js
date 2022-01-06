@@ -2,28 +2,6 @@ const c = (item) => document.querySelector(item);
 const cs = (item) => document.querySelectorAll(item);
 let carrinho = [];
 
-
-const switchCategoria = (idCat) => {
-    if(idCat=="tudo"){
-        c("#listaCategorias li.active").classList.remove("active");
-        c("#listaCategorias li span.active").classList.remove("active");
-        let item = c("#listaCategorias li:first-child");
-        item.classList.add("active");
-        item.querySelector("span").classList.add("active");
-        c("#categoriaAtual").innerHTML = c("#categorias ul li.active:not(span)").innerHTML;
-    } else {
-        let nomeCategoria = JSON.parse(dadosCategoria).find((item)=>{
-            return item.id == idCat;
-        });
-        c("#listaCategorias li.active").classList.remove("active");
-        c("#listaCategorias li span.active").classList.remove("active");
-        let item = c(`[data-id-cat="${nomeCategoria.id}"]`);
-        item.classList.add("active");
-        item.querySelector("span").classList.add("active");
-        c("#categoriaAtual").innerHTML = c("#categorias ul li.active:not(span)").innerHTML;
-    }
-}
-
 const closeModal = () => {
     c('.modal--product').style.opacity = 0;
     setTimeout(function(){
@@ -49,7 +27,9 @@ const openModal = (elem) => {
     c(".product-image img").src = elem.querySelector(".product--img img").src;
     c("#price-product").innerHTML = elem.querySelector("h2").innerHTML;
     c(".product-infos .desc").innerHTML = elem.querySelector(".descricaoModal").innerHTML;
-    c("#qt-estoq").innerHTML = elem.querySelector(".product--infos h2").getAttribute("data-estoque");
+    let qtEstoque = elem.querySelector(".product--infos h2").getAttribute("data-estoque");
+    c("#qt-estoq").innerHTML = qtEstoque;
+    c("#qt-estoq").setAttribute("data-estoque",qtEstoque);
     c(".exit-modal").addEventListener("click",closeModal);
     c(".exit-modal2").addEventListener("click",closeModal);
     c("header").style.position = "static";
@@ -67,10 +47,13 @@ const diminuirQnt = ()=> {
 };
 const aumentarQnt = ()=> {
     let qtModal = parseInt(c(".qt-prod").innerHTML);
-    let qtModalAntes = qtModal;
-    qtModal++;
-    c(".qt-prod").innerHTML = qtModal;
-    attTotal(qtModal,qtModalAntes);
+    let qtEstoque = parseInt(c("#qt-estoq").innerHTML);
+    if(qtEstoque > qtModal){
+        let qtModalAntes = qtModal;
+        qtModal++;
+        c(".qt-prod").innerHTML = qtModal;
+        attTotal(qtModal,qtModalAntes);
+    }
 };
 c('.minus').addEventListener("click",diminuirQnt);
 c('.plus').addEventListener("click",aumentarQnt);

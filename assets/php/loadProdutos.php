@@ -1,10 +1,17 @@
 <?php
 	//adiciono meu arquivo de functions
-	require_once('functions.php');
-	
+	require_once('Banco.class.php');
+	//recebo via post minha variavel enviada pelo ajax
+	$indice = $_POST['page'];
+	$categoria = $_POST['cat'];
+	// Qnt de data recebido
+	$qnt = 60;
 	//instacio minha classe
-	$Allure = new Allure_Updates();
-	// chamo meu método passando as variaveis de controle da query e guardo numa variavel
-
-	$produtos = $Allure->todosProdutos();
-    print_r(gettype($produtos));
+	$Allure = new Banco();
+	//chamo meu método passando as variaveis de controle da query e guardo numa variavel
+	$produtos = $Allure->puxarDadosCat($indice,$qnt,$categoria);
+	if($produtos){	
+		print_r(json_encode($produtos));
+	} else {
+		print_r('{"retorno":false}');
+	}

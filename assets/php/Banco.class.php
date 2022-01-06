@@ -129,4 +129,14 @@ class Banco extends DadosAPI {
             return $res->fetchAll();
         }
     }
+
+    public function puxarDadosCat($indice,$qnt,$cat){
+        $res = $this->con->query("SELECT * FROM produtos WHERE categoria='{$cat}' LIMIT {$indice},{$qnt}");
+        
+        if($res->rowCount()>0){
+            return $res->fetchAll();
+        } else {
+            return false;
+        }
+    }
 }

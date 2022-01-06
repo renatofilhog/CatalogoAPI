@@ -84,6 +84,29 @@ function carrega(){
         }
     });
 };
+
+function carregaCat(cat){
+    $('#loading').html(" <!-- <img src='assets/img/loader.gif'/> --> Carregando...").fadeIn('slow');
+    $.ajax({
+        type: "POST",
+        url: "./assets/php/loadProdutos.php",
+        data: {"page":pagina,"cat":cat},//variavel passada via post 
+        cache: false,
+        success: function(html){
+            setTimeout(() => {
+                tratarJSON(html);	
+            }, 700);
+            
+            $('#loading').fadeOut('fast');
+            //$("#content").append(html);//mostra resultado na div content
+        },
+        error:function(html){
+            $('#loading').html("erro...").fadeIn('slow');
+        }
+    });
+};
+
+
 function pegarProdutos(){
     $.ajax({
         type: "POST",
@@ -105,8 +128,14 @@ function pegarProdutos(){
 		//minha function carrega novamente para trazer mais dados dinamicamente
 		$(window).scroll(function(){
 			if($(window).scrollTop() + $(window).height() >= $(document).height()){
-				pagina += qntReg;
-				carrega();
+                if(c("#listaCategorias").getAttribute("data-catAtiva") == "tudo"){
+                    pagina += qntReg;
+				    carrega();
+                } else {
+                    pagina += qntReg;
+                    carregaCat(c("#listaCategorias").getAttribute("data-catAtiva"));
+                }
+                
 			};
 		});
 
@@ -140,6 +169,41 @@ const puxarCategorias = ()=> {
         }
     });
 }
+
+const switchCategoria = (cat) => {
+    if(cat=="tudo"){
+        c("#listaCategorias li.active").classList.remove("active");
+        c("#listaCategorias li span.active").classList.remove("active");
+        let item = c("#listaCategorias li:first-child");
+        item.classList.add("active");
+        item.querySelector("span").classList.add("active");
+        c("#categoriaAtual").innerHTML = c("#categorias ul li.active:not(span)").innerHTML;
+        
+        c(".area--produtos").innerHTML = "";
+        pagina = 0;
+        carregaCat(cat);
+
+    } else {
+        let nomeCategoria;
+        cs("#listaCategorias li").forEach((item)=>{
+            if(item.innerText == cat){
+                nomeCategoria = item;
+            }
+        });
+        c("#listaCategorias li.active").classList.remove("active");
+        c("#listaCategorias li span.active").classList.remove("active");
+        
+        nomeCategoria.classList.add("active");
+        nomeCategoria.querySelector("span").classList.add("active");
+        c("#categoriaAtual").innerHTML = c("#categorias ul li.active:not(span)").innerHTML;
+        
+        c(".area--produtos").innerHTML = "";
+        pagina = 0;
+        carregaCat(cat);
+    }
+}
+
+
 
 //chama minha funcao ao carregar a pagina
 $(document).ready(function(){
