@@ -148,7 +148,7 @@ const tratarCategorias = (resultado)=> {
         let cloneCategoria = c(".modelCategoria li").cloneNode('TRUE');
         cloneCategoria.innerHTML = "<span class='color-site'>&#10004;</span> "+nomeCategoria;
         cloneCategoria.addEventListener("click",()=>{
-            switchCategoria(item.categoria);
+            switchCategoria(nomeCategoria);
         });
         c("#listaCategorias").appendChild(cloneCategoria);
     });
@@ -181,12 +181,13 @@ const switchCategoria = (cat) => {
         
         c(".area--produtos").innerHTML = "";
         pagina = 0;
-        carregaCat(cat);
+        carrega();
 
     } else {
         let nomeCategoria;
         cs("#listaCategorias li").forEach((item)=>{
-            if(item.innerText == cat){
+            let newCat = cat.toLowerCase().trim();
+            if(item.innerText.toLowerCase().trim() == newCat){
                 nomeCategoria = item;
             }
         });

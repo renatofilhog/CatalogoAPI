@@ -3,7 +3,7 @@
 	require_once('Banco.class.php');
 	//recebo via post minha variavel enviada pelo ajax
 	$indice = $_POST['page'];
-	$categoria = $_POST['cat'];
+	$categoria = strtoupper($_POST['cat']);
 	// Qnt de data recebido
 	$qnt = 60;
 	//instacio minha classe

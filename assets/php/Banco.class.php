@@ -91,7 +91,7 @@ class Banco extends DadosAPI {
         
         $sku = $ar["sku"];
         $nome = $ar["nome"];
-        $categoria = $ar["categoria"];
+        $categoria = strtoupper($ar["categoria"]);
         $imgSrc = $ar["imgsrc"];
         $preco = $ar["preco"];
         $estoque = $ar["estoque"];
