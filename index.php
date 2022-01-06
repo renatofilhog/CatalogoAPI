@@ -2,7 +2,6 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Catálogo RDF</title>
@@ -10,11 +9,13 @@
 <body>
     <div class="modal--product">
         <div class="container--modal">
+        <div class="exit-modal2">Voltar</div>
             <div class="product-image">
                 <img src="https://rosadodesertofortaleza.com.br/wp-content/uploads/2021/11/15097609429_Akira20II203-1.png">
             </div>
             <div class="product-infos">
                 <div class="exit-modal">x</div>
+                
                 <h1 id="title-product" data-sku="">Title do Produto</h1>
                 <h4 id="cat-product">Categoria Produto</h4>
                 <p class="desc">
@@ -77,7 +78,7 @@
             </div>
         </div>
     </div>
-    <header class="container">
+    <header class="">
         <div class="search--area">
             <img src="assets/img/lupa.png">
             <input type="text" name="search" id="search--global" placeholder="O que você procura ?">
@@ -98,11 +99,17 @@
                 <div class="modelCategoria">
                     <li><span class="color-site">&#10004;</span>Rosas</li>
                 </div>
+                
                 <h3>Categorias</h3>
                 <ul id="listaCategorias">
                     <li class="active" onclick="switchCategoria('tudo')"><span class="active color-site">&#10004;</span> Tudo</li>
                 </ul>
             </aside>
+            <div class="menu-mobile close">
+                <div class="listra"></div>
+                <div class="listra"></div>
+                <div class="listra"></div>
+            </div>
             <section id="produtos">
                 <h3 class="color-site" id="categoriaAtual"><span class="active color-site">&#10004;</span> Tudo</h3>
                 <div class="model">

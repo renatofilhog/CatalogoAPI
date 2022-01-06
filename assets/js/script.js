@@ -34,7 +34,8 @@ const closeModal = () => {
     c(".product-image img").src = "";
     c("#price-product").innerHTML = "";
     c(".qt-prod").innerHTML = "1";
-    c(".product-infos .desc").innerHTML = ""
+    c(".product-infos .desc").innerHTML = "";
+    c("header").style.position = "fixed";
 }
 const openModal = (elem) => {
     c('.modal--product').style.opacity = 0;
@@ -50,6 +51,8 @@ const openModal = (elem) => {
     c(".product-infos .desc").innerHTML = elem.querySelector(".descricaoModal").innerHTML;
     c("#qt-estoq").innerHTML = elem.querySelector(".product--infos h2").getAttribute("data-estoque");
     c(".exit-modal").addEventListener("click",closeModal);
+    c(".exit-modal2").addEventListener("click",closeModal);
+    c("header").style.position = "static";
 }
 
 
@@ -145,6 +148,7 @@ const abrirCarrinho = () => {
         setTimeout(()=>{
             c('.modal-cart').style.opacity = 1;
         },100);
+        c("header").style.position = "static";
     }
 }
 const fecharCarrinho = () => {
@@ -152,6 +156,7 @@ const fecharCarrinho = () => {
     setTimeout(()=>{
         c('.modal-cart').style.display = 'none';
     },500);
+    c("header").style.position = "fixed";
 }
 c(".box--cart").addEventListener("click",abrirCarrinho);
 c(".fechar-carrinho").addEventListener("click",fecharCarrinho);
@@ -219,4 +224,15 @@ const aumentarQntCart = (sku)=> {
     carrinho[indexAr].subtotalItem = precoUnit * +carrinho[indexAr].quantidade;
     attCarrinho();
 };
-
+const toggleMenuMobile = () => {
+    if( c(".menu-mobile").classList.contains("close") ){
+        c("#categorias").style.marginLeft = "0px";
+        c(".menu-mobile").style.marginLeft = "-40px";
+        c('.menu-mobile').classList.remove("close");
+    } else {
+        c("#categorias").style.marginLeft = "-220px";
+        c(".menu-mobile").style.marginLeft = "0px";
+        c('.menu-mobile').classList.add("close");
+    }
+}
+c(".menu-mobile").addEventListener("click",toggleMenuMobile);

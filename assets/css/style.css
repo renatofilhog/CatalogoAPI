@@ -17,9 +17,16 @@ h3 {
 }
 header {
     height: 120px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 40px;
+    border-bottom: 1.5px solid #ccc;
 }
 .search--area {
     display: flex;
@@ -37,6 +44,7 @@ header {
 }
 header .logo--area img {
     height: 100px;
+    
 }
 .box--cart {
     display: flex;
@@ -47,6 +55,7 @@ header .logo--area img {
     padding: 3px;
     background-color: #bb97c3;
     font-size: 15pt;
+    margin-right: 20px;
 }
 
 .qnt-box {
@@ -59,8 +68,9 @@ header .logo--area img {
 }
 
 main {
-    border-top: 1.5px solid #ccc;
     padding-top: 30px;
+    overflow-x: hidden;
+    margin-top: 120px;
 }
 .main {
     display: flex;
@@ -70,8 +80,9 @@ main {
     display: flex;
     flex-direction: column;
     width: 250px;
-    
+    transition: all 0.5s;
 }
+
 #listaCategorias li {
     text-transform: capitalize;
 }
@@ -164,7 +175,7 @@ section #produtos {
     position: fixed;
     right: 0;
     top: 0;
-    width: 40%;
+    width: 0vw;
     height: 100vw;
     background-color: #ddd;
 }
@@ -287,33 +298,42 @@ section #produtos {
 .container--modal {
     transition: 0.5s;
     border-radius: 20px;
-    width: 70%;
-    height: 90%;
+    width: 70vw;
+    height: 40vw;
     background-color: #ddd;
     display: flex;
     justify-content: space-between;
     padding: 20px;
+    padding-bottom: 40px;
 }
 .exit-modal {
     position: fixed;
-    margin-top: -70px;
-    margin-left: 28%;
+    margin-top: -25px;
+    margin-left: 37%;
     font-size: 30px;
     cursor: pointer;
 }
+.exit-modal2 {
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 5px;
+    display: none;
+}
 .product-image {
-    width: 55%;
-    height: 60%;
+    width: 40%;
+    height: 50%;
     align-self: center;
     text-align: center;
+    margin-top: -60px;
 }
 .product-image img {
-    height: 100%;
+    width: 100%;
     border-radius: 10px;
 }
 .product-infos {
-    max-width: 45%;
-    padding-top: 70px;
+    flex:1;
+    margin-left: 30px;
+    padding-top: 5px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -333,12 +353,13 @@ section #produtos {
 .product-infos .desc {
     margin-top: 20px;
     margin-bottom: 20px;
-    font-size: 18px;
+    font-size: 12px;
     text-align: justify;
     overflow-y: auto;
 }
+
 .product-infos h3 {
-    margin-top: 40px;
+    margin-top: 10px;
     font-size: 17px;
 }
 .product-infos h3 span {
@@ -401,3 +422,108 @@ section #produtos {
     cursor: pointer;
     color: #FFF;
 }
+
+.menu-mobile {
+    margin-right: 20px;
+    margin-top: 8px;
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+.menu-mobile .listra {
+    width: 25px;
+    border-radius: 15px;
+    height: 3.5px;
+    background-color: #bb97c3;
+    margin-bottom: 2px;
+}
+.close {
+    margin-left: 0px;
+}
+/* Responsividade */
+@media (max-width: 1024px) {
+    header {
+        padding: 0 20px;
+    }
+    #categorias h3 {
+        padding: 0 20px;
+    }
+    .container--modal {
+        width: 90vw;
+        height: 70vw;
+    }
+    .exit-modal {
+        margin-left: 47%;
+    }
+}
+
+@media (max-width: 768px){
+    .area--produtos {
+        grid-template-columns: 1fr 1fr;
+    }
+    .menu-mobile {
+        display: flex;
+    }
+    #categorias {
+        margin-left: -220px;
+    }
+    .product-infos h1 {
+        font-size: 25px;
+    }   
+    .product-infos h2 {
+        font-size: 25px;
+    }
+}
+@media (max-width: 425px) {
+    .area--produtos {
+        grid-template-columns: 1fr;
+    }
+    main {
+        margin-top: 200px;
+    }
+    header {
+        padding: 10px;
+        height: auto;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+    .search--area {
+        margin-left: 40px;
+    }
+    .container--modal {
+        width: 100vw;
+        height: 100%;
+        border-radius: 0;
+        flex-direction: column;
+    }
+    .product-infos .desc {
+        height: 50vw;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    .product-image {
+        width: 90%;
+        height: 35%;
+        margin-top: 0;
+    }
+    .product-image img {
+        height: 100%;
+    }
+    .button-cart {
+        margin-top: 0;
+    }
+    .exit-modal {
+        display: none;
+    }
+    .exit-modal2 {
+        display: block;
+    }
+}
+
+@media (max-width: 320px){
+    .menu-mobile {
+        margin-left: 45px;
+    }
+}
+
