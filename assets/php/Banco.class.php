@@ -1,12 +1,13 @@
 <?php
 require_once("APIBling.class.php");
+define("AMBIENTE", "desenvolvimento");
 
 class Banco extends DadosAPI {
     private $con;
-    private $user = "root";
-    private $pass = "";
-    private $db = "catalogordf";
-    private $ip = "localhost";
+        private $user = AMBIENTE == "desenvolvimento" ? "root":"u218871904_crdf";
+        private $pass = AMBIENTE == "desenvolvimento" ? "":"md5(RDF)";
+        private $db = AMBIENTE == "desenvolvimento" ? "catalogordf":"u218871904_crdf";
+        private $ip = AMBIENTE == "desenvolvimento" ? "localhost":"localhost";
     
     public function __construct(){
         try {
