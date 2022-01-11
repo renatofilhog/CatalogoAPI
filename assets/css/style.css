@@ -83,8 +83,8 @@ main {
     width: 250px;
     transition: all 0.5s;
 }
-
-#listaCategorias li {
+#listaCategorias li,
+#categoriaAtual {
     text-transform: capitalize;
 }
 .modelCategoria {
@@ -110,8 +110,19 @@ aside ul li span:not(.active) {
 aside ul li:not(.active){
     padding: 10px 40px;
 }
-section #produtos {
+#produtos {
     flex:1;
+}
+.topProduto {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+#ordenar {
+    border:0;
+    outline: 0;
+    text-align: center;
+    width: 130px;
 }
 .area--produtos {
     padding-top: 20px;
@@ -436,6 +447,29 @@ section #produtos {
 .close {
     margin-left: 0px;
 }
+
+/* Subir topo */
+.subir-topo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 70px;
+    margin-right: 90px;
+    background-color: #bb97c3;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+.subir-topo img {
+    height: 65%;
+}
+
+
 /* Responsividade */
 @media (max-width: 1024px) {
     header {

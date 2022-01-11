@@ -113,14 +113,27 @@ class Banco extends DadosAPI {
         
     }
 
-    public function puxarDados($indice,$qnt){
-        $res = $this->con->query("SELECT * FROM produtos LIMIT {$indice},{$qnt}");
+    public function puxarDados($indice,$qnt,$ord,$rank,$cat){
+        if($cat == "PADRAO"){
+            $res = $this->con->query("SELECT * FROM produtos ORDER BY {$ord} {$rank} LIMIT {$indice},{$qnt}");
         
-        if($res->rowCount()>0){
-            return $res->fetchAll();
+            if($res->rowCount()>0){
+                return $res->fetchAll();
+            } else {
+                return false;
+            }
+        } else if ($cat != "padrao"){
+            $res = $this->con->query("SELECT * FROM produtos WHERE categoria='{$cat}' ORDER BY {$ord} {$rank} LIMIT {$indice},{$qnt}");
+        
+            if($res->rowCount()>0){
+                return $res->fetchAll();
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
+        
     }
     
     public function puxarCategoria(){
@@ -133,6 +146,15 @@ class Banco extends DadosAPI {
     public function puxarDadosCat($indice,$qnt,$cat){
         $res = $this->con->query("SELECT * FROM produtos WHERE categoria='{$cat}' LIMIT {$indice},{$qnt}");
         
+        if($res->rowCount()>0){
+            return $res->fetchAll();
+        } else {
+            return false;
+        }
+    }
+
+    public function search($search) {
+        $res = $this->con->query("SELECT * FROM produtos WHERE nome LIKE '%{$search}%'");
         if($res->rowCount()>0){
             return $res->fetchAll();
         } else {

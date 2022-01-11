@@ -225,3 +225,13 @@ const toggleMenuMobile = () => {
     }
 }
 c(".menu-mobile").addEventListener("click",toggleMenuMobile);
+document.addEventListener("keydown",(e)=>{
+    if(e.keyCode === 27 && c("#title-product").innerText != "Title do Produto") {
+        closeModal();
+    }
+    if(e.keyCode === 27 && c(".total-cart").innerText != "0") {
+        if(carrinho.length < 1) {
+            fecharCarrinho();        
+        }
+    }
+});

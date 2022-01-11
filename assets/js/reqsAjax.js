@@ -2,7 +2,10 @@ var dadosProduto = [];
 
 const tratarJSON = (resultado) => {
     let res = JSON.parse(resultado);
-
+    console.log(resultado);
+    if(res.retorno == false){
+        c(".area--produtos").innerHTML = "Não há mais registros";
+    }
 
     // // Descrição/nome: item.produto.descricao
     // // Categoria: item.produto.categoria.descricao
@@ -47,50 +50,19 @@ const tratarJSON = (resultado) => {
     });
 
 }
-const ordenarPorEstoque = (arr) => {
-    arr.sort(
-        (a,b)=>{
-            if(a.estoque < b.estoque){
-                return true;
-            } else {
-                return -1;
-            }
-        }
-    );
-}
-
 
 //variavel para controle de registros retornados
 let pagina = 0;
-let qntReg = 60;
+let qntReg = 20;
+let ordenacao = "padrao";
+let categ = "padrao";
 //function carrega
 function carrega(){
     $('#loading').html(" <!-- <img src='assets/img/loader.gif'/> --> Carregando...").fadeIn('slow');
     $.ajax({
         type: "POST",
-        url: "./assets/php/loadAjax.php",
-        data: "page="+pagina,//variavel passada via post 
-        cache: false,
-        success: function(html){
-            setTimeout(() => {
-                tratarJSON(html);	
-            }, 700);
-            
-            $('#loading').fadeOut('fast');
-            //$("#content").append(html);//mostra resultado na div content
-        },
-        error:function(html){
-            $('#loading').html("erro...").fadeIn('slow');
-        }
-    });
-};
-
-function carregaCat(cat){
-    $('#loading').html(" <!-- <img src='assets/img/loader.gif'/> --> Carregando...").fadeIn('slow');
-    $.ajax({
-        type: "POST",
         url: "./assets/php/loadProdutos.php",
-        data: {"page":pagina,"cat":cat},//variavel passada via post 
+        data: {"page":pagina,"cat":categ,"ord":ordenacao},//variavel passada via post 
         cache: false,
         success: function(html){
             setTimeout(() => {
@@ -105,40 +77,40 @@ function carregaCat(cat){
         }
     });
 };
-
-
-function pegarProdutos(){
-    $.ajax({
-        type: "POST",
-        url: "./assets/php/loadAjax.php",
-        data: false, 
-        cache: false,
-        success: function(html){
-            setTimeout(() => {
-                guardarInVar(html);	
-            }, 700);
-        },
-        error:function(html){
-            $('#loading').html("erro...").fadeIn('slow');
-        }
-    });
-};
-
+c("#ordenar").addEventListener("change", (el)=>{
+    if (ordenacao != c("#ordenar").value){
+        ordenacao = c("#ordenar").value;
+        c(".area--produtos").innerHTML = "";
+        carrega();
+    }
+    
+});
+var noLoad = 0;
 //funcao de controle do scroll da pagina, na qual ela chega ao fim � acionada chamando
 		//minha function carrega novamente para trazer mais dados dinamicamente
 		$(window).scroll(function(){
-			if($(window).scrollTop() + $(window).height() >= $(document).height()){
+			if($(window).scrollTop() + $(window).height() >= $(document).height() && noLoad==0){
                 if(c("#listaCategorias").getAttribute("data-catAtiva") == "tudo"){
                     pagina += qntReg;
 				    carrega();
                 } else {
                     pagina += qntReg;
-                    carregaCat(c("#listaCategorias").getAttribute("data-catAtiva"));
-                }
-                
+                    categ = c("#listaCategorias").getAttribute("data-catAtiva");
+                    carrega();
+                } 
 			};
+
+            // Função subir topo
+            if($(window).scrollTop() > 0) {
+                c(".subir-topo").style.display = "flex";
+            } else {
+                c(".subir-topo").style.display = "none";
+            }
 		});
 
+c(".subir-topo").addEventListener("click",()=> {
+    window.scrollTo({top:0,behavior: "smooth"});
+});
 
 // Categorias
 const tratarCategorias = (resultado)=> {
@@ -198,14 +170,42 @@ const switchCategoria = (cat) => {
         nomeCategoria.querySelector("span").classList.add("active");
         c("#categoriaAtual").innerHTML = c("#categorias ul li.active:not(span)").innerHTML;
         
+        c("#listaCategorias").setAttribute("data-catAtiva",cat);
         c(".area--produtos").innerHTML = "";
         pagina = 0;
-        carregaCat(cat);
+        categ = cat;
+        carrega();
     }
 }
 
+function carregaSearch(search){
+    $('#loading').html(" <!-- <img src='assets/img/loader.gif'/> --> Carregando...").fadeIn('slow');
+    $.ajax({
+        type: "POST",
+        url: "./assets/php/loadProdutosSearch.php",
+        data: {"search":search},//variavel passada via post 
+        cache: false,
+        success: function(html){
+            setTimeout(() => {
+                tratarJSON(html);	
+            }, 700);
+            $('#loading').fadeOut('fast');
+        },
+        error:function(html){
+            $('#loading').html("erro...").fadeIn('slow');
+        }
+    });
+};
 
-
+c("#search--global").addEventListener("keyup",(e)=>{
+    if(c("#search--global").value.length > 3){
+        let digitado = c("#search--global").value;
+        c(".area--produtos").innerHTML = "";
+        noLoad = 1;
+        carregaSearch(digitado);
+        
+    }
+});
 //chama minha funcao ao carregar a pagina
 $(document).ready(function(){
     carrega();

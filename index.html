@@ -71,7 +71,7 @@
             <div class="footer-cart">
                 <button>Finalizar</button>
                 <div class="total-cart">
-                    R$ 4.004,00
+                    0
                 </div>
             </div>
         </div>
@@ -108,7 +108,16 @@
                 <div class="listra"></div>
             </div>
             <section id="produtos">
-                <h3 class="color-site" id="categoriaAtual"><span class="active color-site">&#10004;</span> Tudo</h3>
+                <div class="topProduto">
+                    <h3 class="color-site" id="categoriaAtual"><span class="active color-site">&#10004;</span> Tudo</h3>
+                    <select name="ordenacao" id="ordenar">
+                        <option value="padrao" selected>Padrão</option>
+                        <option value="menor-preco">Menor Preço</option>
+                        <option value="maior-preco">Maior Preço</option>
+                        <option value="menor-estoque">Menor Estoque</option>
+                        <option value="maior-estoque">Maior Estoque</option>
+                    </select>
+                </div>
                 <div class="model">
                     <div class="product--box">
                         <div class="product--img">
@@ -126,6 +135,9 @@
                     <div id="loading"></div>
                 </div>
             </section>
+        </div>
+        <div class="subir-topo">
+            <img src="assets/img/up-arrow.png" />
         </div>
     </main>
     <script src="assets/js/jquery.min152.js"></script>
