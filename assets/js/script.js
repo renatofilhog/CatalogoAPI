@@ -139,11 +139,6 @@ const abrirCarrinho = () => {
     }
 }
 const fecharCarrinho = () => {
-    // c('.modal-cart').style.opacity = 0;
-    // setTimeout(()=>{
-    //     c('.modal-cart').style.display = 'none';
-    // },500);
-    // c("header").style.position = "fixed";
     c('.cart-side').classList.remove("showCart");
     c("header").style.position = "fixed";
 }
@@ -153,32 +148,12 @@ c('#add-product-cart').addEventListener("click",addCarrinho);
 
 
 const finalizarCompra = () => {
-    let total = 0;
-    let pedido = "Resumo Pedido *Rosa do Deserto Fortaleza* %0d%0a\n";
-    pedido += "Carrinho: %0d%0a\n";
-    carrinho.forEach((item,index)=>{
-        pedido += `Item: ${index} %0d%0a\n`;
-        pedido += `- Produto: ${item.nomeProduto} %0d%0a\n`;
-        pedido += `- - SKU: ${item.skuProduto} %0d%0a\n`;
-        pedido += `- - Quantidade: ${item.quantidade} %0d%0a\n`;
-        pedido += `- - Subtotal: ${item.subtotalItem} %0d%0a%0d%0a%0d%0a\n \n \n`;
-        total += item.subtotalItem;
-    });
-    pedido += `%0d%0a%0d%0a\n \n Total: ${total} %0d%0a\n`;
-    pedido += `_Agradecemos a preferência_`;
+    sessionStorage.setItem("pedido",JSON.stringify(carrinho));
     let a = document.createElement('a');
-    a.target="_blank";
-    a.href="https://api.whatsapp.com/send?phone=5585997495640&text="+pedido;
+    a.href = "pedido.php";
     a.click();
-    a.removeChild();
 }
 c(".footer-cart button").addEventListener("click",finalizarCompra);
-
-
-
-
-
-
 
 const diminuirQntCart = (sku)=> {
     let indexAr = undefined;

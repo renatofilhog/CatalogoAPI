@@ -204,6 +204,7 @@ aside ul li:not(.active){
 }
 .body-cart {
     padding: 30px;
+    overflow-y: auto;
 }
 
 .item-cart {

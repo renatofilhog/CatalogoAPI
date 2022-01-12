@@ -2,7 +2,6 @@ var dadosProduto = [];
 
 const tratarJSON = (resultado) => {
     let res = JSON.parse(resultado);
-    console.log(resultado);
     if(res.retorno == false){
         c(".area--produtos").innerHTML = "Não há mais registros";
     }
