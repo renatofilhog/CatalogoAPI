@@ -21,4 +21,4 @@
         }
     }
 
-    header("Location: /catalogo/index.php");
+    echo "SUCESSO";
