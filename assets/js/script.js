@@ -1,7 +1,7 @@
 const c = (item) => document.querySelector(item);
 const cs = (item) => document.querySelectorAll(item);
 let carrinho = [];
-
+var modalOpen = 0;
 const closeModal = () => {
     c('.modal--product').style.opacity = 0;
     setTimeout(function(){
@@ -14,6 +14,8 @@ const closeModal = () => {
     c(".qt-prod").innerHTML = "1";
     c(".product-infos .desc").innerHTML = "";
     c("header").style.position = "fixed";
+    c(".subir-topo").style.display = "flex";
+    modalOpen = 0;
 }
 const openModal = (elem) => {
     c('.modal--product').style.opacity = 0;
@@ -30,9 +32,10 @@ const openModal = (elem) => {
     let qtEstoque = elem.querySelector(".product--infos h2").getAttribute("data-estoque");
     c("#qt-estoq").innerHTML = qtEstoque;
     c("#qt-estoq").setAttribute("data-estoque",qtEstoque);
-    c(".exit-modal").addEventListener("click",closeModal);
-    c(".exit-modal2").addEventListener("click",closeModal);
+    c("#exit-modal").addEventListener("click",closeModal);
     c("header").style.position = "static";
+    c(".subir-topo").style.display = "none";
+    modalOpen = 1;
 }
 
 

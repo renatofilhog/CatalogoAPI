@@ -100,7 +100,7 @@ var noLoad = 0;
 			};
 
             // Função subir topo
-            if($(window).scrollTop() > 0) {
+            if($(window).scrollTop() > 0 && modalOpen==0) {
                 c(".subir-topo").style.display = "flex";
             } else {
                 c(".subir-topo").style.display = "none";

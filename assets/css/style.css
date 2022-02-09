@@ -305,37 +305,29 @@ aside ul li:not(.active){
 
 .container--modal {
     transition: 0.5s;
-    border-radius: 20px;
-    width: 70vw;
-    height: 40vw;
-    background-color: #ddd;
+    width: 100%;
+    height: 100%;
+    background-color: #f7f7f7;
     display: flex;
-    justify-content: space-between;
     padding: 20px;
     padding-bottom: 40px;
 }
-.exit-modal {
-    position: fixed;
-    margin-top: -25px;
-    margin-left: 37%;
-    font-size: 30px;
-    cursor: pointer;
-}
-.exit-modal2 {
-    text-align: center;
-    cursor: pointer;
-    margin-bottom: 5px;
-    display: none;
+
+#exit-modal {
+    background-color: #fb7c7c;
+    margin-left: 10px;
 }
 .product-image {
     width: 40%;
-    height: 50%;
-    align-self: center;
-    text-align: center;
-    margin-top: -60px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
 }
 .product-image img {
-    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
     border-radius: 10px;
 }
 .product-infos {
@@ -345,6 +337,8 @@ aside ul li:not(.active){
     height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .product-infos h1 {
     margin-bottom: 0;
@@ -361,9 +355,10 @@ aside ul li:not(.active){
 .product-infos .desc {
     margin-top: 20px;
     margin-bottom: 20px;
-    font-size: 12px;
+    font-size: 18px;
     text-align: justify;
     overflow-y: auto;
+    max-width: 80%;
 }
 
 .product-infos h3 {
@@ -479,13 +474,6 @@ aside ul li:not(.active){
     #categorias h3 {
         padding: 0 20px;
     }
-    .container--modal {
-        width: 90vw;
-        height: 70vw;
-    }
-    .exit-modal {
-        margin-left: 47%;
-    }
     .showCart {
         width:70vw;
     }
@@ -531,16 +519,24 @@ aside ul li:not(.active){
     .container--modal {
         width: 100vw;
         height: 100%;
+        
         border-radius: 0;
         flex-direction: column;
     }
+    .product-infos {
+        margin-left: 0;
+    }
+    .sep {
+        margin-right: 15px;
+    }
     .product-infos .desc {
+        font-size: 14px;
         height: 50vw;
         margin-top: 0;
         margin-bottom: 0;
     }
     .product-image {
-        width: 90%;
+        width: 100%;
         height: 35%;
         margin-top: 0;
     }
@@ -549,12 +545,6 @@ aside ul li:not(.active){
     }
     .button-cart {
         margin-top: 0;
-    }
-    .exit-modal {
-        display: none;
-    }
-    .exit-modal2 {
-        display: block;
     }
     .showCart {
         width: 100vw;
