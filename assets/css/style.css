@@ -480,6 +480,10 @@ aside ul li:not(.active){
 }
 
 @media (max-width: 768px){
+    .subir-topo {
+        margin-bottom: 50px;
+        margin-right: 25px;
+    }
     .area--produtos {
         grid-template-columns: 1fr 1fr;
     }
