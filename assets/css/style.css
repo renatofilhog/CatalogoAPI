@@ -507,6 +507,30 @@ aside ul li:not(.active){
     .area--produtos {
         grid-template-columns: 1fr;
     }
+    #produtos {
+        padding-right: 7px;
+    }
+    .product--box {
+        width: 100%;
+        height: 210px;
+        flex-direction: row;
+    }
+    .product--img {
+        width: 100px;
+        height: 100%;
+    }
+    .product--img img {
+        max-height: 100%;
+        width: 100%;
+    }
+    .product--infos {
+        margin-left: 10px;
+        flex: 1;
+        justify-content: center;
+    }
+    .product--infos h4 {
+        font-size: 17px;
+    }
     main {
         margin-top: 200px;
     }
