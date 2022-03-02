@@ -77,7 +77,6 @@ class Banco extends DadosAPI {
                         $estoque += $item->deposito->saldo;
                     }
                 }
-                echo $estoque . "<br>";
                 if($estoque>0 && $sku != ""){
                     $produto = [
                         "sku"=>$sku,
