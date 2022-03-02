@@ -20,6 +20,9 @@
             print_r($arrayRecebido);
         } else if ($arrayRecebido == 99) {
             echo "Página ".$page." não tem registros";
+            echo "Rodou ".$i." vezes. Página: ".$page." <br>";
+            $i++;
+            $page+=1;
         } else {
             foreach($arrayRecebido as $chave => $item){
                 $Allure->insert($item);
