@@ -9,16 +9,23 @@
     $page = 1;
 
     $continuar = true;
+    $i=1;
+    
     while($continuar == true){
+        
         $arrayRecebido = $Allure->load($page);
         if($arrayRecebido == false) {
+            
             $continuar = false;
+            print_r($arrayRecebido);
+        } else if ($arrayRecebido == 99) {
+            echo "Página ".$page." não tem registros";
         } else {
             foreach($arrayRecebido as $chave => $item){
                 $Allure->insert($item);
             }
+            echo "Rodou ".$i." vezes. Página: ".$page." <br>";
+            $i++;
             $page+=1;
         }
     }
-
-    echo "SUCESSO";

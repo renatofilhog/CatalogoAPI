@@ -1,11 +1,13 @@
 <?php    
 	class DadosAPI {
 		private $apikey = "d175c08415f1ff256508d238a0094c3e21a0a133a5bcbd48e99de96f4602a12034c647f9";
-		private $outputType = "json";
+		private $outputType = "xml";
 		private $url = "";
 		public function getProdutos($page) {
-			$this->url = 'https://bling.com.br/Api/v2/produtos/page='.$page.'/' . $this->outputType;
-			$retorno = $this->executeQueryAPI("&estoque=S&imagem=S&situacao=A");
+			$filtros = '&estoque=S&imagem=S&situacao=A';
+			$this->url = 'https://bling.com.br/Api/v2/produtos/page='.$page.'/' . $this->outputType . "/&apikey=".$this->apikey . $filtros;
+			
+			$retorno = simplexml_load_file($this->url);
 			return $retorno;
 		}
 
@@ -32,8 +34,9 @@
 		
 		private function executeQueryAPI($adicional=""){
 			$curl_handle = curl_init();
-			curl_setopt($curl_handle, CURLOPT_URL, $this->url . '&apikey=' . $this->apikey  .  $adicional);
+			curl_setopt($curl_handle, CURLOPT_URL, $this->url . '/&apikey=' . $this->apikey  .  $adicional);
 			curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, TRUE);
+			//$this->url = 'https://bling.com.br/Api/v2/produtos/page=6/json/apikey=d175c08415f1ff256508d238a0094c3e21a0a133a5bcbd48e99de96f4602a12034c647f9&estoque=S&imagem=S&situacao=A';
 			$response = curl_exec($curl_handle);
 			curl_close($curl_handle);
 			return $response;

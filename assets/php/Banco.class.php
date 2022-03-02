@@ -49,28 +49,35 @@ class Banco extends DadosAPI {
     }
 
     public function load($page) {
-        $results = json_decode(parent::getProdutos($page));
+        sleep(0.35);
+        $results = parent::getProdutos($page);
         $produtosArray = [];
-        $erro = isset($results->retorno->erros[0]->erro->cod);
+        $erro =0;
+        if(isset($results->erros[0]->erro->cod)){
+            $erro = 1;
+        };
         if($erro == 1){
-            return false;
+            echo $erro;
+            echo "entrou aqui";
+            return $produtosArray;
         } else {
-            foreach ($results->retorno->produtos as $chave => $item){
-                $sku = $item->produto->codigo;
-                $nome = $item->produto->descricao;
-                $categoria = $item->produto->categoria->descricao;
-                $preco = $item->produto->preco;
-                $descricao = $item->produto->descricaoCurta;
+            foreach ($results->produtos->produto as $chave => $item){
+                $sku = $item->codigo;
+                $nome = $item->descricao;
+                $categoria = $item->categoria->descricao;
+                $preco = $item->preco;
+                $descricao = $item->descricaoCurta;
                 $imgSrc = "noimg";
-                foreach($item->produto->imagem as $chave => $item2){
+                foreach($item->imagem as $chave => $item2){
                     $imgSrc = $item2->link;
                 }
                 $estoque = 0;
-                foreach($item->produto->depositos as $item){
+                foreach($item->depositos as $item){
                     if($item->deposito->desconsiderar == "N"){
                         $estoque += $item->deposito->saldo;
                     }
                 }
+                echo $estoque . "<br>";
                 if($estoque>0 && $sku != ""){
                     $produto = [
                         "sku"=>$sku,
@@ -84,8 +91,12 @@ class Banco extends DadosAPI {
                     array_push($produtosArray,$produto);
                 }
             }
-            return $produtosArray;
-        } 
+            if(count($produtosArray) == 0){
+                return 99;
+            } else {
+                return $produtosArray;
+            }
+        }
     }
 
     public function insert($ar){
