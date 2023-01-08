@@ -21,7 +21,7 @@ window.onload = ()=>{
         });
         let now = new Date();
         let dayName = new Array ("Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado");
-        let monName = new Array ("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Agosto", "Outubro", "Novembro", "Dezembro");
+        let monName = new Array ("", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho","Agosto", "Setembro", "Outubro", "Novembro", "Dezembro");
         let hoje = `${dayName[now.getDay()]}, ${now.getDate()} de ${monName[now.getMonth()]} de ${now.getFullYear()} - ${now.getHours()}:${now.getMinutes()}`;
         document.querySelector("#data").innerHTML = hoje;
         document.querySelector("#totalQt").innerHTML = quantidade;

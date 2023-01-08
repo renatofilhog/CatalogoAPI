@@ -52,10 +52,10 @@
         </div>
     </main>
     <footer>
-        <img src="assets/img/logoRDF.png">
+        <img src="assets/img/logo.png">
         <div class="info">
-            <p>Rosa do Deserto Fortaleza</p>
-            <p>CNPJ: 20.593.239/0001-20</p>
+            <p>Bebetenkite Comercial LTDA</p>
+            <p>CNPJ: 11.301.092/0001-66</p>
         </div>
     </footer>
     <script src="assets/js/html2canvas.min.js"></script>

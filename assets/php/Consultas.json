@@ -1,0 +1,29 @@
+{
+    "filter": {
+      "hasPrice": true,
+      "branchPriceCodeList": [
+        1,2
+      ],
+      "priceCodeList": [
+        1
+      ],
+      "hasStock": true,
+      "branchStockCode": 9,
+      "stockCode": 1,
+      "classifications": [
+        {
+          "type": 105,
+          "codeList": [
+            "132"
+          ]
+        }
+      ]
+    },
+    "option": {
+      "branchInfoCode": 2
+    },
+    "page": 1,
+    "pageSize": 10,
+    "expand": "barCodes,classifications",
+    "order": "-referenceCode,productSize"
+}

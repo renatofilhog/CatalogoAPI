@@ -4,12 +4,14 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    --color-red-bebe: var(--color-yellow-bebe);
+    --color-yellow-bebe: #c4c80e;
 }
 h3 {
     font-size: 20px;
 }
 .color-site {
-    color: #bb97c3;
+    color: var(--color-yellow-bebe);
 }
 .container {
     max-width: 1140px;
@@ -54,7 +56,7 @@ header .logo--area img {
     border-radius: 5px;
     cursor: pointer;
     padding: 3px;
-    background-color: #bb97c3;
+    background-color: var(--color-yellow-bebe);
     font-size: 15pt;
     margin-right: 20px;
 }
@@ -343,7 +345,7 @@ aside ul li:not(.active){
 .product-infos h1 {
     margin-bottom: 0;
     padding-bottom: 0;
-    color: #bb97c3;
+    color: var(--color-yellow-bebe);
     font-size: 35px;
 }
 .product-infos h4 {
@@ -437,7 +439,7 @@ aside ul li:not(.active){
     width: 25px;
     border-radius: 15px;
     height: 3.5px;
-    background-color: #bb97c3;
+    background-color: var(--color-yellow-bebe);
     margin-bottom: 2px;
 }
 .close {
@@ -451,7 +453,7 @@ aside ul li:not(.active){
     bottom: 0;
     margin-bottom: 70px;
     margin-right: 90px;
-    background-color: #bb97c3;
+    background-color: var(--color-yellow-bebe);
     width: 45px;
     height: 45px;
     cursor: pointer;

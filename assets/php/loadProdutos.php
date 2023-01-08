@@ -1,41 +1,44 @@
 <?php
-	//adiciono meu arquivo de functions
-	require_once('Banco.class.php');
+	include_once("handlerApi.php");
+	$req = new handlerApi();
+
 	//recebo via post minha variavel enviada pelo ajax
-	$indice = $_POST['page'];
-	// Recebo a categoria
-	$categoria = strtoupper($_POST['cat']);
-	// Recebo a ordenação:
-	$ord = $_POST['ord'];
-	switch($ord){
-		case "menor-preco":
-			$ordenacao = "preco";
-			$rank = "ASC";
-			break;
-		case "maior-preco":
-			$ordenacao = "preco";
-			$rank = "DESC";
-			break;
-		case "menor-estoque":
-			$ordenacao = "estoque";
-			$rank = "ASC";
-			break;
-		case "maior-estoque":
-			$ordenacao = "estoque";
-			$rank = "DESC";
-			break;
-		default:
-			$ordenacao = "id";
-			$rank = "ASC";
+	if(isset($_POST['page'])){
+		$indice = intval($_POST['page']);
+	} else {
+		$indice = 1;
 	}
+	
 	// Qnt de data recebido
-	$qnt = 20;
-	//instacio minha classe
-	$Allure = new Banco();
+	if(isset($_POST['qnt'])){
+		$qnt = intval($_POST['qnt']);
+	} else {
+		$qnt = 20;
+	}
+
+	
+
+	// Url requisição:
+	$urlReq = 'https://www30.bhan.com.br:9443/api/totvsmoda/product/v2/references/search';
+	$headers[] = 'Authorization: Bearer '.$req->getToken();
+	$headers[] = 'Content-Type: application/json';
+	$headers[] = 'accept: application/json';
+
+	$filtro = $req->filtroProduto($qnt, $indice);
+	$filtro["expand"] = "classifications,additionalFields,webDetail, referenceCategories";
 	//chamo meu método passando as variaveis de controle da query e guardo numa variavel
-	$produtos = $Allure->puxarDados($indice,$qnt,$ordenacao,$rank,$categoria);
+
+	
+	$produtos = $req->requerirPOST(
+		$urlReq,
+		$headers,
+		json_encode($filtro)
+	);
+
+	
+
 	if($produtos){	
-		print_r(json_encode($produtos));
+		print_r($produtos);
 	} else {
 		print_r('{"retorno":false}');
 	}

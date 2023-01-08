@@ -1,12 +1,13 @@
 <?php
-	//adiciono meu arquivo de functions
-	require_once('Banco.class.php');
-	//instacio minha classe
-	$Allure = new Banco();
-	//chamo meu método passando as variaveis de controle da query e guardo numa variavel
-	$categorias = $Allure->puxarCategoria();
-	if($categorias){	
-		print_r(json_encode($categorias));
-	} else {
-		print_r('{"retorno":false}');
-	}
+include_once("handlerApi.php");
+$req = new handlerApi();
+$arr = [];
+$urlReq = 'https://www30.bhan.com.br:9443/api/totvsmoda/product/v2/category?Order=-code';
+$headers = [
+    'Accept: application/json',
+    'Authorization: Bearer '.$req->getToken()
+];
+
+$arr = $req->requerirGET($urlReq, $headers);
+
+print_r(json_encode($arr));
