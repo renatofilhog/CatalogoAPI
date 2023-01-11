@@ -1,35 +1,30 @@
-document.querySelector("body").innerHTML = "OLA MUNDO <br>";
-let pagina = 1;
-let qnt = 40;
-const options = {
+const optionsStock = {
     method: 'POST',
     headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
-    body: `page=${pagina}&qnt=${qnt}`
+    body: `reference=003 BB CST001T`
 };
-
-fetch("./assets/php/loadProdutos.php",options).then((response)=>{
-    response.json().then((html)=>{
-        let arr = html.items;
-        arr.forEach((item)=>{
-            const optionsPreco = {
-                method: 'POST',
-                headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
-                body: `produto=[${item.colors[0].products[0].code}]`
-            };
-            fetch("./assets/php/loadPreco.php",optionsPreco).then((response)=>{
-                response.json().then((k)=>{
-                    console.log(k.items[0].prices[0].price);
-                })
-            });
+fetch("./assets/php/loadStock.php",optionsStock).then((response)=>{
+    response.json().then((r)=>{
+        r.items.forEach((item)=>{
+            let colorCode = item.colorCode;
+            let tam = document.querySelectorAll("tr[data-cor='"+colorCode+"']").length;
+            let qtStock = item.balances[0].stock;
+            if(tam<1){
+                let cloneTRStock = document.querySelector(".model-stock").cloneNode("TRUE");
+                cloneTRStock.setAttribute("data-cor",colorCode);
+                cloneTRStock.classList.remove("model-stock");
+                cloneTRStock.querySelector("#table-stock-color").innerHTML = item.colorName;
+                cloneTRStock.querySelector("td[data-tam='"+item.sizeName+"']").innerHTML = qtStock;
+                document.querySelector(".stock-table").appendChild(cloneTRStock);
+            } else {
+                let element = document.querySelector("tr[data-cor='"+colorCode+"']");
+                element.querySelector("td[data-tam='"+item.sizeName+"']").innerHTML = qtStock;
+            }
         });
-        //console.log(html.items);
-        
-    });
+    })
 });
 
-const buscarCategoria = (arr)=>{
-    const found = arr.find((el)=>{
-        return el.typeCode == 105;
-    });
-    return found.name
-}
+
+
+let cloneTRStock = document.querySelector(".model-stock").cloneNode("TRUE");
+cloneTRStock.classList.remove("model-stock");

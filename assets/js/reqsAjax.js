@@ -41,7 +41,7 @@ const tratarJSON = (res) => {
         descricao += '<br>Tamanho: '+item.size;
         descricao += '<br>Referencia: '+item.lastReferenceCode;
         
-        cloneBoxProduto.querySelector(".product--infos h4").setAttribute("data-sku",item.productSku);
+        cloneBoxProduto.querySelector(".product--infos h4").setAttribute("data-sku",item.ReferenceCode);
         cloneBoxProduto.querySelector(".product--infos h4").setAttribute("data-id",item.productCode);
         cloneBoxProduto.querySelector(".product--infos h4").innerHTML = item.name;
         cloneBoxProduto.querySelector(".product--infos p").innerHTML = categoria.name + " " + item.ReferenceCode;
@@ -64,9 +64,7 @@ const tratarJSON = (res) => {
                 let pr = k.items[0].prices[0].price;
                 cloneBoxProduto.querySelector(".product--infos h2").innerHTML = `R$ ${parseFloat(pr).toFixed(2).replace(".",",")}`;
             })
-        });
-        //`R$ ${parseFloat(item.preco).toFixed(2).replace(".",",")}`;
-        
+        });        
         cloneBoxProduto.querySelector(".product--infos h2").setAttribute("data-estoque",1);
         
         c(".area--produtos").appendChild(cloneBoxProduto);

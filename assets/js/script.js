@@ -11,55 +11,59 @@ const closeModal = () => {
     c("#cat-product").innerHTML = "";
     c(".product-image img").src = "";
     c("#price-product").innerHTML = "";
-    c(".qt-prod").innerHTML = "1";
+    
     c(".product-infos .desc").innerHTML = "";
     c("header").style.position = "fixed";
     c(".subir-topo").style.display = "flex";
+    document.querySelectorAll("#tr-stock:not(.model-stock)").forEach((item)=>{item.remove()});
     modalOpen = 0;
 }
 const openModal = (elem) => {
+    
+
     c('.modal--product').style.opacity = 0;
     c('.modal--product').style.display = 'flex';
     setTimeout(()=>{
         c('.modal--product').style.opacity = 1;
     },100);
+    const optionsStock = {
+        method: 'POST',
+        headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
+        body: `reference=${elem.querySelector("h4").getAttribute("data-sku")}`
+    };
+    fetch("./assets/php/loadStock.php",optionsStock).then((response)=>{
+        response.json().then((r)=>{
+            r.items.forEach((item)=>{
+                let colorCode = item.colorCode;
+                let tam = document.querySelectorAll("tr[data-cor='"+colorCode+"']").length;
+                let qtStock = item.balances[0].stock;
+                if(tam<1){
+                    let cloneTRStock = document.querySelector(".model-stock").cloneNode("TRUE");
+                    cloneTRStock.setAttribute("data-cor",colorCode);
+                    cloneTRStock.classList.remove("model-stock");
+                    cloneTRStock.querySelector("#table-stock-color").innerHTML = item.colorName;
+                    cloneTRStock.querySelector("td[data-tam='"+item.sizeName+"']").innerHTML = qtStock;
+                    document.querySelector(".stock-table").appendChild(cloneTRStock);
+                } else {
+                    let element = document.querySelector("tr[data-cor='"+colorCode+"']");
+                    element.querySelector("td[data-tam='"+item.sizeName+"']").innerHTML = qtStock;
+                }
+            });
+        })
+    });
     c("#title-product").innerHTML = elem.querySelector("h4").innerHTML;
     c("#title-product").setAttribute("data-sku",elem.querySelector("h4").getAttribute("data-sku"));
     c("#cat-product").innerHTML = elem.querySelector("p").innerHTML;
     c(".product-image img").src = elem.querySelector(".product--img img").src;
     c("#price-product").innerHTML = elem.querySelector("h2").innerHTML;
-    c(".product-infos .desc").innerHTML = elem.querySelector(".descricaoModal").innerHTML;
-    let qtEstoque = elem.querySelector(".product--infos h2").getAttribute("data-estoque");
-    c("#qt-estoq").innerHTML = qtEstoque;
-    c("#qt-estoq").setAttribute("data-estoque",qtEstoque);
+    
     c("#exit-modal").addEventListener("click",closeModal);
     c("header").style.position = "static";
     c(".subir-topo").style.display = "none";
     modalOpen = 1;
+    
 }
 
-
-const diminuirQnt = ()=> {
-    let qtModal = parseInt(c(".qt-prod").innerHTML);
-    let qtModalAntes = qtModal;
-    if( qtModal > 1 ){
-        qtModal--;
-        c(".qt-prod").innerHTML = qtModal;
-        attTotal(qtModal,qtModalAntes);
-    }
-};
-const aumentarQnt = ()=> {
-    let qtModal = parseInt(c(".qt-prod").innerHTML);
-    let qtEstoque = parseInt(c("#qt-estoq").innerHTML);
-    if(qtEstoque > qtModal){
-        let qtModalAntes = qtModal;
-        qtModal++;
-        c(".qt-prod").innerHTML = qtModal;
-        attTotal(qtModal,qtModalAntes);
-    }
-};
-c('.minus').addEventListener("click",diminuirQnt);
-c('.plus').addEventListener("click",aumentarQnt);
 
 const attTotal = (qt,qtAntes) => {
     let precoModal = c("#price-product").innerHTML.substr(3,99);
@@ -115,12 +119,7 @@ const attCarrinho = () => {
             itemNovo.querySelector(".nome-produto-carrinho").setAttribute("data-sku",sku);
             itemNovo.querySelector(".qt-cart-prod").innerHTML = item.quantidade;
             itemNovo.querySelector(".price-cart").innerHTML = "R$ "+item.subtotalItem.toFixed(2).replace(".",",");
-            itemNovo.querySelector(".qt-cart-minus").addEventListener("click",()=>{
-                diminuirQntCart(sku);
-            });
-            itemNovo.querySelector(".qt-cart-plus").addEventListener("click",()=>{
-                aumentarQntCart(sku);
-            });
+            
             totalItens += item.subtotalItem;
             c(".products-cart").appendChild(itemNovo);
         });
@@ -147,7 +146,7 @@ const fecharCarrinho = () => {
 }
 c(".box--cart").addEventListener("click",abrirCarrinho);
 c(".fechar-carrinho").addEventListener("click",fecharCarrinho);
-c('#add-product-cart').addEventListener("click",addCarrinho);
+
 
 
 const finalizarCompra = () => {

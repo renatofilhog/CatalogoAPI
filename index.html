@@ -8,6 +8,14 @@
     <link rel="apple-touch-icon" href="assets/img/icone.png" />
     <title>Catálogo de Produtos</title>
 </head>
+<style>
+    .cart-side {
+        display: none;
+    }
+    .cart--area {
+        opacity: 0;
+    }
+</style>
 <body>
     <div class="modal--product">
         <div class="container--modal">
@@ -19,23 +27,34 @@
                 <h1 id="title-product" data-sku="">Title do Produto</h1>
                 <h4 id="cat-product">Categoria Produto</h4>
                 <p class="desc">
-                    Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim
-                    labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi
-                    animcupidatat
-                </p>
-                <h3>Estoque: <span id="qt-estoq">2</span></h3>
-                <h2 id="price-product">R$ 450,00</h2>
+                    <strong>Estoque</strong>
+                    <table class="stock-table">
+                        <thead>
+                            <th>COR</th>
+                            <th>P</th>
+                            <th>M</th>
+                            <th>G</th>
+                            <th>2</th>
+                            <th>4</th>
+                            <th>6</th>
+                            <th>8</th>
+                            <th>10</th>
+                        </thead>
+                        <tr id="tr-stock" class="model-stock">
+                            <td id="table-stock-color">COR</td>
+                            <td data-tam="P" id="table-stock-p">0</td>
+                            <td data-tam="M" id="table-stock-m">0</td>
+                            <td data-tam="G" id="table-stock-g">0</td>
+                            <td data-tam="2" id="table-stock-2">0</td>
+                            <td data-tam="4" id="table-stock-4">0</td>
+                            <td data-tam="6" id="table-stock-6">0</td>
+                            <td data-tam="8" id="table-stock-8">0</td>
+                            <td data-tam="10" id="table-stock-10">0</td>
+                        </tr>
+                    </table>
+                </p><br><br>
+                <h2 id="price-product">R$ --,--</h2>
                 <div class="button-cart">
-                    <div class="sep">
-                        <div class="quantidade">
-                            <button class="minus">-</button>
-                            <div class="qt-prod">1</div>
-                            <button class="plus">+</button>
-                        </div>
-                    </div>
-                    <div class="but">
-                        <button id="add-product-cart">Adicionar</button>
-                    </div>
                     <div class="but">
                         <button id="exit-modal">Voltar</button>
                     </div>

@@ -7,6 +7,9 @@
     --color-red-bebe: var(--color-yellow-bebe);
     --color-yellow-bebe: #c4c80e;
 }
+.model-stock {
+    display: none;
+}
 h3 {
     font-size: 20px;
 }
@@ -467,6 +470,19 @@ aside ul li:not(.active){
     height: 65%;
 }
 
+.stock-table {
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    
+}
+.stock-table td, .stock-table th {
+    border: 1px solid rgb(0, 0, 0);
+}
+.stock-table td:nth-child(1), .stock-table th {
+    background-color: #c4c80e;
+}
 
 /* Responsividade */
 @media (max-width: 1024px) {

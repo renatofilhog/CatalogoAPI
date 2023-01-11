@@ -1,2 +1,47 @@
-<body></body>
+<style>
+.stock-table {
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    
+}
+.stock-table td, .stock-table th {
+    border: 1px solid rgb(0, 0, 0);
+}
+.stock-table td:nth-child(1), .stock-table th {
+    background-color: #c4c80e;
+}
+.model-stock{
+    display: none;
+}
+</style>
+<body>
+    <table class="stock-table">
+        <thead>
+            <th>COR</th>
+            <th>P</th>
+            <th>M</th>
+            <th>G</th>
+            <th>2</th>
+            <th>4</th>
+            <th>6</th>
+            <th>8</th>
+            <th>10</th>
+        </thead>
+        <tr id="tr-stock" class="model-stock" data-cor="n3">
+            <td id="table-stock-color">COR</td>
+            <td data-tam="P" id="table-stock-p">-</td>
+            <td data-tam="M" id="table-stock-m">-</td>
+            <td data-tam="G" id="table-stock-g">-</td>
+            <td data-tam="2" id="table-stock-2">-</td>
+            <td data-tam="4" id="table-stock-4">-</td>
+            <td data-tam="6" id="table-stock-6">-</td>
+            <td data-tam="8" id="table-stock-8">-</td>
+            <td data-tam="10" id="table-stock-10">-</td>
+        </tr>
+
+    </table>
+
+</body>
 <script src="teste.js"></script>

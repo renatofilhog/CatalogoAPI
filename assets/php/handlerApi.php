@@ -125,6 +125,34 @@ class handlerApi {
         return $arr;
     }
 
+    public function filtroStock(
+        $reference
+    ){
+        $arr = [
+            "filter"=>[
+                "hasPrice"=>true,
+                "branchPriceCodeList"=>[1,2],
+                "priceCodeList"=>[1],
+                "referenceCodeList"=>$reference,
+                "hasStock"=>true,
+                "branchStockCode"=>9,
+                "stockCode"=>1
+            ],
+            "option"=>[
+                "balances"=>[[
+                    "branchCode"=> 9,
+                    "stockCodeList"=>[1]
+                ]]
+            ],
+            "page"=>1,
+            "pageSize"=>10,
+            "expand"=>"barCodes,classifications",
+            "order" =>"-referenceCode,productSize"
+        ];
+
+        return $arr;
+    }
+
 
 
 
