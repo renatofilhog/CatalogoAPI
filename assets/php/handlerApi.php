@@ -74,6 +74,22 @@ class handlerApi {
         return $result;
     }
 
+    public function getCategorias(){
+        $arr = [];
+        $urlReq = 'https://www30.bhan.com.br:9443/api/totvsmoda/product/v2/category?Order=-code';
+        $headers = [
+            'Accept: application/json',
+            'Authorization: Bearer '.$this->getToken()
+        ];
+
+        $arr = $this->requerirGET($urlReq, $headers);
+        $arr2 = [];
+        foreach($arr["items"] as $ar){
+            $arr2[] = strval($ar['code']);
+        }
+        return $arr2;
+    }
+
     public function filtroProduto(
         $pageSize = 10, $page = 1, $classFilhas = ["132","131","133"]
     ){

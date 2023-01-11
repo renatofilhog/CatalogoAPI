@@ -12,7 +12,7 @@
     .cart-side {
         display: none;
     }
-    .cart--area {
+    .cart--area, #ordenar, .search--area {
         opacity: 0;
     }
 </style>
@@ -121,7 +121,7 @@
                 
                 <h3>Categorias</h3>
                 <ul id="listaCategorias" data-catAtiva="tudo">
-                    <li class="active" onclick="switchCategoria('tudo')"><span class="active color-site">&#10004;</span> Tudo</li>
+                    <li class="active" data-codecat='null' onclick="switchCategoria('null')"><span class="active color-site">&#10004;</span> Tudo</li>
                 </ul>
             </aside>
             <div class="menu-mobile close">
